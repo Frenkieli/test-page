@@ -1,0 +1,544 @@
+$grayOpacity: rgba(60, 60, 67, 0.6);
+$lightBlack: #333;
+$black: #1d1d1f;
+$darkGray: #4c4c50;
+$lightGray: #f8f8f8;
+$gray: #636366;
+$borderGray: #d6d6d6;
+$linkBlue: #0070c9;
+
+@mixin pad {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin sectionTitle {
+  color: $black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+html,
+body {
+  font-family: "Pingfang TC", Arial, VideoJS, sans-serif;
+}
+
+section {
+  padding: 16px 0;
+  border-bottom: 1px solid $borderGray;
+
+  .title {
+    @include sectionTitle;
+  }
+}
+
+header {
+  padding: 0 16px;
+  font-size: 20px;
+
+  section {
+    border-bottom: 1px solid $borderGray;
+
+    span {
+      color: $gray;
+    }
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+
+  // 主要資訊
+  .app-info {
+    order: 0;
+
+    &-card {
+      display: flex;
+      gap: 15px;
+
+      @include pad {
+        gap: 30px;
+      }
+
+      &-head {
+        width: 33.333333%;
+
+        img {
+          width: 100%;
+          max-width: 231px;
+          vertical-align: middle;
+        }
+      }
+
+      &-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        width: 66.66667%;
+
+        &-info {
+          h2 {
+            font-size: 22px;
+          }
+
+          p {
+            margin-top: 4px;
+            color: $gray;
+            font-size: 10px;
+
+            @include pad {
+              font-size: 16px;
+            }
+          }
+
+          a {
+            display: none;
+
+            @include pad {
+              margin-top: 4px;
+              text-decoration: 0;
+              color: $linkBlue;
+              display: inline-block;
+            }
+          }
+        }
+
+        &-score {
+          display: none;
+
+          @include pad {
+            margin-top: 30px;
+            display: block;
+
+            &-star {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+
+              &-picture {
+                height: 18px;
+
+                img {
+                  width: 49px;
+                  vertical-align: middle;
+                }
+              }
+
+              &-text {
+                color: $gray;
+                font-size: 12px;
+              }
+            }
+
+            &-describe {
+              margin-top: 12px;
+              font-size: 12px;
+              p {
+                color: $lightBlack;
+                
+                span {
+                  color: $gray;
+                }
+              }
+            }
+          }
+        }
+
+        &-btn {
+          display: none;
+          margin-top: auto;
+
+          a {
+            background-color: $borderGray;
+            cursor: pointer;
+            background-image: linear-gradient(to right, $linkBlue 0%, $linkBlue 100%);
+            background-repeat: no-repeat;
+            color: #fff;
+            border: 1px solid $linkBlue;
+            padding: 2px 14px 3px;
+            border-radius: 12.5px;
+            font-weight: 500;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+
+  // 手機概要信息
+  .app-summary {
+    order: 1;
+
+    @include pad {
+      display: none;
+    }
+    
+    &-content {
+      display: flex;
+      justify-content: space-evenly;
+
+      &-item {
+        position: relative;
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 9px;
+        color: $gray;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 6px;
+          bottom: 6px;
+          width: 1px;
+          right: -0.5px;
+          background-color: $borderGray;
+        }
+
+        &:last-child {
+          &::after {
+            content: unset;
+          }
+        }
+
+        img {
+          height: 13px;
+          vertical-align: middle;
+        }
+
+        &-body {
+          font-size: 19px;
+          line-height: 1.5em;
+          color: $darkGray;
+        }
+      }
+    }
+  }
+
+  // 更新版本
+  .app-version {
+    order: 2;
+
+    @include pad {
+      order: 5;
+    }
+
+    &-card {
+      &-body {
+        li {
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+          margin-top: 14px;
+
+          span:first-child {
+            color: $gray;
+            margin-bottom: 12px;
+          }
+
+          span:last-child {
+            color: $black;
+          }
+
+          @include pad {
+            flex-direction: row;
+            justify-content: space-between;
+
+            span:first-child {
+              order: 1;
+              color: $gray;
+              margin-bottom: 12px;
+            }
+  
+            span:last-child {
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 截屏
+  .app-picture {
+    order: 3;
+
+    &-card {
+
+      &-body {
+        margin-top: 12px;
+        img {
+          width: 100%;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  // 描述
+  .app-describe {
+    order: 4;
+
+    &-card {
+      font-size: 12px;
+      font-weight: 600;
+      color: $black;
+
+      &-body {
+        margin-top: 20px;
+
+        p {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  // 評論
+  .app-comment {
+    order: 5;
+    font-size: 20px;
+    color: $black;
+    font-weight: 600;
+
+    &-card {
+      &-head {
+        &-box {
+          display: flex;
+          gap: 10px;
+          padding-bottom: 16px;
+          align-items: stretch;
+          margin-top: 10px;
+          color: $darkGray;
+          border-bottom: 1px solid $borderGray;
+
+          @include pad {
+            border-bottom: 0;
+          }
+
+
+          &-score {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 600;
+
+            @include pad {
+              flex-direction: row;
+              align-items: flex-end;
+            }
+
+            p {
+              font-size: 60px;
+            }
+
+            span {
+              color: $darkGray;
+              font-size: 12px;
+
+              @include pad {
+                margin-left: 4px;
+              }
+
+              span {
+                display: none;
+              }
+
+              @include pad {
+                margin-bottom: 8px;
+
+                span {
+                  display: inline;
+                  vertical-align: text-top;
+                }
+              }
+            }
+          }
+
+          &-rate {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            align-items: flex-end;
+
+            @include pad {
+              flex-grow: 0;
+              flex-direction: row;
+              padding: 8px 0;
+              margin-left: 90px;
+            }
+
+            &-chart {
+              padding-top: 6px;
+              img {
+                flex-grow: 1;
+                width: 100%;
+                max-height: 45px;
+                vertical-align: middle;
+              }
+            }
+
+            &-total {
+              margin-top: auto;
+              font-size: 12px;
+              color: $gray;
+
+              @include pad {
+                order: -1;
+              }
+            }
+          }
+        }
+      }
+
+      &-body {
+        padding-top: 16px;
+        
+        @include pad {
+          padding-top: 0px;
+          display: flex;
+          gap: 20px;
+          align-items: stretch;
+        }
+
+        &-item {
+          display: flex;
+          flex-direction: column;
+          font-size: 12px;
+          padding: 16px;
+          background-color: $lightGray;
+
+          &:not(:first-child) {
+            display: none;
+          }
+
+          @include pad {
+            width: 33.3333%;
+            &:not(:first-child) {
+              display: flex;
+            }
+          }
+
+          &-head {
+            img {
+              height: 24px;
+              vertical-align: middle;
+            }
+
+            &-date {
+              margin-top: 8px;
+              font-weight: 400;
+              color: $gray;
+            }
+          }
+
+          &-body, &-footer {
+            margin-top: 15px;
+
+            &-title {
+              color: $black;
+
+              :first-child {
+                font-weight: 600;
+              }
+
+              p {
+                margin-top: 2px;
+                line-height: 1.2em;
+                font-weight: 400;
+              }
+            }
+          }
+
+          &-footer {
+            margin-top: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  padding: 0 16px;
+
+  section {
+    border-bottom: 0px;
+  }
+
+  h2 {
+    font-size: 20px;
+    color: $black;
+    font-weight: 600;
+  }
+
+  div {
+    @include pad {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    figure {
+      padding: 12px 0;
+      font-size: 12px;
+      border-bottom: 1px solid $borderGray;
+
+      &.table {
+        display: none;
+      }
+      
+      @include pad {
+        &.mobile {
+          display: none;
+        }
+
+        &.table {
+          display: block;
+        }
+      }
+
+      &:last-child {
+        border-bottom: 0px;
+      }
+
+      @include pad {
+        width: 33.3333%;
+        border-bottom: 0px;
+      }
+
+      figcaption {
+        display: flex;
+        justify-content: space-between;
+        @include pad {
+          flex-direction: column;
+        }
+
+        h3 {
+          color: $gray;
+
+          @include pad {
+            margin-bottom: 4px;
+          } 
+        }
+
+        p {
+          text-align: right;
+          color: $black;
+
+          &:not(&:first-of-type) {
+            margin-top: 4px;
+          }
+
+          @include pad {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}
