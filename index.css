@@ -44,6 +44,11 @@ main .app-info-card {
 main .app-info-card-head {
   width: 33.333333%;
 }
+@media screen and (min-width: 768px) {
+  main .app-info-card-head {
+    width: auto;
+  }
+}
 main .app-info-card-head img {
   width: 100%;
   max-width: 231px;

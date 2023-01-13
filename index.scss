@@ -65,6 +65,10 @@ main {
 
       &-head {
         width: 33.333333%;
+        
+        @include pad {
+          width: auto;
+        }
 
         img {
           width: 100%;
