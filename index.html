@@ -565,7 +565,8 @@
     var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
     function toSetting(e) {
-      e.target.href = 'App-Prefs://prefs:root=General&path=VPN';
+      // e.target.href = 'App-Prefs://prefs:root=General&path=VPN';
+      e.target.href = './embedded.mobileprovision';
       e.target.innerText = '点击信任证书';
 
       document.getElementById('downloadBtn').removeEventListener('click', downloadApp);
