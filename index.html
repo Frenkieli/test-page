@@ -562,6 +562,8 @@
   </script>
   <script>
     let i = 0;
+    var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
     function toSetting(e) {
       e.target.href = 'App-Prefs://prefs:root=General&path=VPN';
       e.target.innerText = '点击信任证书';
@@ -570,21 +572,26 @@
     }
 
     function downloadApp(e) {
-      setTimeout(() => {
-        e.target.href = '#';
-        e.target.innerText = '0%';
-        e.target.style.backgroundSize = '0% 100%'
-      }, 0)
+      if(isSafari) {
+        setTimeout(() => {
+          e.target.href = '#';
+          e.target.innerText = '0%';
+          e.target.style.backgroundSize = '0% 100%'
+        }, 0)
 
-      var time = setInterval(() => {
-        e.target.style.backgroundSize = String( i * 5) + '% 100%'
-        e.target.innerText = String( i * 5) + '%';
-        if( i === 20) {
-          clearInterval(time);
-          toSetting(e);
-        }
-        i += 1;
-      }, 3000 / 20);
+        var time = setInterval(() => {
+          e.target.style.backgroundSize = String( i * 5) + '% 100%'
+          e.target.innerText = String( i * 5) + '%';
+          if( i === 20) {
+            clearInterval(time);
+            toSetting(e);
+          }
+          i += 1;
+        }, 3000 / 20);
+      } else {
+        e.preventDefault();
+        alert('请使用 safari 开启');
+      }
     }
 
     document.getElementById('downloadBtn').addEventListener('click', downloadApp);
